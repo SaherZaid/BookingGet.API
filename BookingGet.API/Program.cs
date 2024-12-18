@@ -34,7 +34,7 @@ app.MapGet("/bookings", async (HttpContext context) =>
         BaseAddress = new Uri(repoUri)
     };
 
-    // Forward the request to the repository service
+    // Forward the request to the repository service.
     var response = await httpClient.GetAsync("/bookings");
     if (!response.IsSuccessStatusCode)
     {
