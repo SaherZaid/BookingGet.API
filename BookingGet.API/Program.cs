@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://0.0.0.0:5952");
+builder.WebHost.UseUrls("http://0.0.0.0:7952");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddCors(options =>
         options.AddPolicy(
-            "Support",
+            "Booking",
             policy =>
                 policy
                     .WithOrigins("http://localhost:7777")
@@ -20,7 +20,7 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseCors("Support");
+app.UseCors("Booking");
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -28,7 +28,7 @@ app.UseSwaggerUI();
 
 app.MapGet("/bookings", async (HttpContext context) =>
 {
-    var repoUri = Environment.GetEnvironmentVariable("REPO_URI") ?? "http://repo:5030";
+    var repoUri = Environment.GetEnvironmentVariable("REPO_URI") ?? "http://bookings-repo:7050";
     using var httpClient = new HttpClient
     {
         BaseAddress = new Uri(repoUri)
